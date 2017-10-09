@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toast("真是人才呀！");
+                toast("真是人才！");
 //                BaseFragmentActivity.startFragment(getActivity(), TestFragment.class, null);
 //                Intent intent = new Intent(getActivity(),TestActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
