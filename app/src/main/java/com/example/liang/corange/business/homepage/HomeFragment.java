@@ -86,14 +86,16 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
+
         if(adapter==null){
             adapter = new HomeFragmentListAdapter(getActivity());
         }
 
         List<HomeFragmentListModel> list = new ArrayList<>();
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 1; i <10 ; i++) {
             HomeFragmentListModel model = new HomeFragmentListModel();
-            model.setText("看吧"+i);
+            model.setTime("2017-10-"+i);
+            model.setAddress("潘达利亚");
             list.add(model);
         }
         adapter.setData(list);

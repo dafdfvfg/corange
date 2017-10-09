@@ -60,7 +60,8 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
     @Override
     public void onBindViewHolder(ItemViewHold holder, int position) {
         HomeFragmentListModel model = data.get(position);
-        holder.textView.setText(model.getText());
+        holder.textView.setText(model.getTime());
+        holder.textView2.setText(model.getAddress());
 
 
     }
@@ -72,10 +73,12 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
 
     public class ItemViewHold extends RecyclerView.ViewHolder {
         private TextView textView;
+        private TextView textView2;
 
         public ItemViewHold(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text);
+            textView2 = (TextView) itemView.findViewById(R.id.text2);
 
         }
     }
