@@ -78,6 +78,9 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
         }
     }
 
+
+
+
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
@@ -95,6 +98,7 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
             mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativelayout);
 
         }
+
     }
 
     public interface onIntemClickListener {

@@ -14,6 +14,7 @@
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrecyclerview"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_below="@+id/title_view"
         android:layout_height="match_parent"/>
 

@@ -39,7 +39,7 @@ public class BaseFragmentActivity extends BaseActivity {
         setContentView(R.layout.activity_empty_container);
         onNewIntent(getIntent());
         changeStatusBarCompat(false, 0);
-        this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        this.overridePendingTransition(R.anim.in_from_right, android.R.anim.fade_out);
     }
 
     @Override
@@ -50,6 +50,7 @@ public class BaseFragmentActivity extends BaseActivity {
                 showFragment(intent.getStringExtra("fname"), intent.getBundleExtra("args"));
             } else if (intent.getBooleanExtra("finish", false)) {
                 intent.removeExtra("finish");
+                this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 finish();
             }
         }
@@ -271,5 +272,11 @@ public class BaseFragmentActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        this.overridePendingTransition(0, R.anim.in_from_right);
     }
 }

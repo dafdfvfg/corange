@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.liang.corange.R;
 import com.example.liang.corange.network.HttpUtils;
 import com.example.liang.corange.ui.BaseFragment;
+import com.example.liang.corange.ui.BaseFragmentActivity;
 import com.example.liang.corange.views.TitleView;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ import okhttp3.Response;
 
 public class MineFragment extends BaseFragment {
     private TitleView titleView;
+    private TextView textView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,13 @@ public class MineFragment extends BaseFragment {
     private void initWidget(View view) {
         titleView = (TitleView) view.findViewById(R.id.title_view);
         titleView.setLeftDrawableVisible(false);
+        textView = (TextView)view.findViewById(R.id.text);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaseFragmentActivity.startFragment(getActivity(),TestFragment.class,null);
+            }
+        });
         Map<String, String> map = new HashMap<>();
         map.put("key","bc269be612b2e20cb75dcc8451237905");
         map.put("v","1.0");
