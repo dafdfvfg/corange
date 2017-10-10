@@ -41,7 +41,6 @@
         </activity>
 
         <receiver android:name=".broadcast.NetStateChangeBroadCastReciver">
-
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
@@ -49,8 +48,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT"/>
             </intent-filter>
-
         </receiver>
+
         <activity
             android:name=".ui.BaseFragmentActivity"/>
         <activity
