@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.liang.corange.R;
@@ -21,6 +22,7 @@ import java.util.List;
 public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentListAdapter.ItemViewHold> {
     private Context context;
     private List<HomeFragmentListModel> data = new ArrayList<>();
+    private onIntemClickListener onIntemClickListener;
 
 
     public HomeFragmentListAdapter(Context context) {
@@ -50,6 +52,10 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
         notifyDataSetChanged();
     }
 
+    public void setOnIntemClickListener(onIntemClickListener onIntemClickListener) {
+        this.onIntemClickListener = onIntemClickListener;
+    }
+
     @Override
     public ItemViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.fragment_home_list_item, parent, false);
@@ -59,11 +65,17 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
 
     @Override
     public void onBindViewHolder(ItemViewHold holder, int position) {
-        HomeFragmentListModel model = data.get(position);
+        final HomeFragmentListModel model = data.get(position);
         holder.textView.setText(model.getTime());
         holder.textView2.setText(model.getAddress());
-
-
+        if (onIntemClickListener != null) {
+            holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onIntemClickListener.itemClick(model);
+                }
+            });
+        }
     }
 
     @Override
@@ -72,6 +84,7 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
     }
 
     public class ItemViewHold extends RecyclerView.ViewHolder {
+        private RelativeLayout mRelativeLayout;
         private TextView textView;
         private TextView textView2;
 
@@ -79,7 +92,12 @@ public class HomeFragmentListAdapter extends RecyclerView.Adapter<HomeFragmentLi
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text);
             textView2 = (TextView) itemView.findViewById(R.id.text2);
+            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativelayout);
 
         }
+    }
+
+    public interface onIntemClickListener {
+        void itemClick(HomeFragmentListModel model);
     }
 }

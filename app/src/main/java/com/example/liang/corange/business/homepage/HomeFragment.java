@@ -92,7 +92,7 @@ public class HomeFragment extends BaseFragment {
         }
 
         List<HomeFragmentListModel> list = new ArrayList<>();
-        for (int i = 1; i <10 ; i++) {
+        for (int i = 1; i <11 ; i++) {
             HomeFragmentListModel model = new HomeFragmentListModel();
             model.setTime("2017-10-"+i);
             model.setAddress("潘达利亚");
@@ -100,5 +100,11 @@ public class HomeFragment extends BaseFragment {
         }
         adapter.setData(list);
         mXRecyclerView.setAdapter(adapter);
+        adapter.setOnIntemClickListener(new HomeFragmentListAdapter.onIntemClickListener() {
+            @Override
+            public void itemClick(HomeFragmentListModel model) {
+                toast("aiyawoqu"+model.getTime());
+            }
+        });
     }
 }
