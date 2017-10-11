@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.inputmethod.InputMethodManager;
-
 import com.example.liang.corange.R;
 import com.example.liang.corange.common.Configure;
 import com.example.liang.corange.element.Global;
