@@ -10,10 +10,11 @@
         app:titleText="@string/discover"
         app:leftDrawable="@drawable/tab_ic_mine_normal"
         android:layout_height="wrap_content"/>
-    <TextView
+    <Button
+        android:id="@+id/btn_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="发现页面"
+        android:text="sqlite存储"
         android:textSize="28sp" />
 </RelativeLayout>

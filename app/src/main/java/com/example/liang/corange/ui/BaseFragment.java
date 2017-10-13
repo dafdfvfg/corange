@@ -26,16 +26,35 @@ import java.util.List;
 
 
 /**
- * BaseFragment
- * Created by liang on 1/8/2017.
+
+
  */
 public class BaseFragment extends Fragment implements View.OnClickListener {
+
     protected Toast mToast;
+
     protected Dialog dialog;
+
+    // private CompositeSubscription compositeSubscription = new CompositeSubscription();
+    protected boolean pauseClean = true;
+    private List<RxBus.GlobalListener> globalListeners;
 
     public BaseFragment() {
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+        // compositeSubscription.clear();
+        if (globalListeners != null) {
+            for (RxBus.GlobalListener l : globalListeners) {
+                RxBus.get().unregisterAll(l);
+            }
+            globalListeners.clear();
+        }
+    }
 
     @Override
     public void onDetach() {
@@ -53,6 +72,36 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        hideInput();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+//        StatService.trackCustomBeginEvent(getActivity(), "fragment2", getClass().getSimpleName());
+//        StatService.trackBeginPage(getActivity(), getClass().getSimpleName());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+//        StatService.trackCustomEndEvent(getActivity(), "fragment2", getClass().getSimpleName());
+//        StatService.trackEndPage(getActivity(), getClass().getSimpleName());
+        if (pauseClean) {
+            if (globalListeners != null) {
+                for (RxBus.GlobalListener l : globalListeners) {
+                    RxBus.get().unregisterAll(l);
+                }
+                globalListeners.clear();
+            }
+        }
+    }
+
     public void setViewPadding(View... views) {
         TitleView.setViewPadding(getActivity(), views);
     }
@@ -62,7 +111,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showProgressDialog(String text) {
-        showProgressDialog(false, R.layout.dialog_process, 0, text);
+//        showProgressDialog(false, R.layout.dialog_process, 0, text);
     }
 
     protected void showProgressDialog(int layoutID) {
@@ -70,45 +119,48 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
     }
 
     public void showProgressDialog(boolean isCancel, int layoutID) {
-        showProgressDialog(isCancel, layoutID, 0, "");
+//        showProgressDialog(isCancel, layoutID, 0, "");
     }
 
     public void showProgressDialog(int image, int text) {
-        showProgressDialog(false, R.layout.dialog_process, image, getString(text));
+//        showProgressDialog(false, R.layout.dialog_process, image, getString(text));
     }
 
     public void showProgressDialog(boolean isCancel) {
         showProgressDialog(isCancel, R.layout.dialog_process);
     }
 
-    public void showProgressDialog(boolean isCancel, int layoutID, int image, String text) {
-        try {
-            if (dialog == null || !dialog.isShowing()) {
-                dialog = new ProgressDialog(getContext());
-                dialog.show();
-            }
-
-            View loading_view;
-            loading_view = getLayoutInflater(null).inflate(layoutID,
-                    null, false);
-            dialog.setContentView(loading_view);
-
-            ImageView ivLoading = (ImageView) loading_view.findViewById(R.id.iv_loading);
-            TextView tvLoading = (TextView) loading_view.findViewById(R.id.tv_loading);
-
-            if (ivLoading != null && image > 0) {
-                ivLoading.setImageResource(image);
-            }
-
-            if (tvLoading != null) {
-                tvLoading.setText(text);
-            }
-
-            dialog.setCancelable(isCancel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void showProgressDialog(boolean isCancel, int layoutID, int image, String text) {
+//        try {
+//            // if (handler != null) handler.removeCallbacks(dismissDialogRunnable);
+//            // ProgressDialog oldDialog = dialog;
+//
+//            if (dialog == null || !dialog.isShowing()) {
+//                dialog = new ProgressDialog(getContext());
+//                dialog.show();
+//            }
+//
+//            View loading_view;
+//            loading_view = getLayoutInflater(null).inflate(layoutID,null, false);
+//            dialog.setContentView(loading_view);
+//
+//
+//            ImageView ivLoading = (ImageView) loading_view.findViewById(R.id.iv_loading);
+//            TextView tvLoading = (TextView) loading_view.findViewById(R.id.tv_loading);
+//
+//            if (ivLoading != null && image > 0) {
+//                ivLoading.setImageResource(image);
+//            }
+//
+//            if (tvLoading != null) {
+//                tvLoading.setText(text);
+//            }
+//
+//            dialog.setCancelable(isCancel);
+//        } catch (Exception e) {
+//
+//        }
+//    }
 
 
     public void dismissDialog() {
@@ -116,7 +168,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
             try {
                 dialog.dismiss();
             } catch (Exception e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
             dialog = null;
         }
@@ -146,6 +198,15 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+//    public DialogManager showTipDialog(int message) {
+//        DialogManager dlg = new DialogManager(getContext(), DialogManager.SIMPLE_TEXT_DIALOG);
+//        dlg.setTitle(R.string.tip);
+//        dlg.setPositiveButton(R.string.i_see, null);
+//        dlg.setMessage(message);
+//
+//        dlg.show(getFragmentManager());
+//        return dlg;
+//    }
 
     public void finish() {
         BaseFragmentActivity activity = (BaseFragmentActivity) getActivity();
@@ -164,6 +225,9 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
     //隐藏软键盘
     public void hideInput() {
         try {
+            /* if (isDetached() || !isVisible()) {
+                return;
+            } */
 
             InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (getActivity().getCurrentFocus() != null)
@@ -214,6 +278,24 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
         activity.setFragmentResult(this, result, data);
     }
 
+    public RxBus.GlobalListener registerEvent(int eventId, RxBus.GlobalListener action1) {
+        RxBus.GlobalListener listener = RxBus.get().register(eventId, action1);
+        if (globalListeners == null) {
+            globalListeners = new ArrayList<>();
+        }
+        globalListeners.add(listener);
+        //        if (observables == null) {
+        //            observables = new HashMap<>();
+        //        }
+        //        observables.put(tag, observable);
+        //        return observable;
+        return listener;
+    }
+
+    public void setPauseClean(boolean pauseClean) {
+        this.pauseClean = pauseClean;
+    }
+
     public void showFragment(String fname, Bundle args) {
         Activity activity = getActivity();
         if (activity != null && activity instanceof BaseFragmentActivity) {
@@ -240,27 +322,5 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             activity.onBackPressed();
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        hideInput();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        hideInput();
     }
 }

@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -29,9 +32,8 @@ import okhttp3.Response;
  */
 
 public class MineFragment extends BaseFragment {
-    private TitleView titleView;
-    private TextView textView;
-
+    @BindView(R.id.title_view) TitleView titleView;
+    @BindView(R.id.text) TextView textView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine_main, null);
-        initWidget(view);
+        ButterKnife.bind(this,view);
         return view;
 
     }
@@ -49,18 +51,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    private void initWidget(View view) {
-        titleView = (TitleView) view.findViewById(R.id.title_view);
         titleView.setLeftDrawableVisible(false);
-        textView = (TextView)view.findViewById(R.id.text);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BaseFragmentActivity.startFragment(getActivity(),TestFragment.class,null);
-            }
-        });
         Map<String, String> map = new HashMap<>();
         map.put("key","bc269be612b2e20cb75dcc8451237905");
         map.put("v","1.0");
@@ -77,10 +68,15 @@ public class MineFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                    Log.d("wocao","成功?"+response.toString());
+                Log.d("wocao","成功?"+response.toString());
 //                Toast.makeText(getActivity(),"人才呀",Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+
+    @OnClick(R.id.text)
+    public void setOnClik(){
+        BaseFragmentActivity.go(getActivity(),TestFragment.class,null);
     }
 }

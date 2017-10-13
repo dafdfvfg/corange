@@ -38,14 +38,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * 首页
  * Created by liang on 1/8/2017.
  */
 
 public class HomeFragment extends BaseFragment {
-    private TitleView titleView;
-    private XRecyclerView mXRecyclerView;
+    @BindView(R.id.title_view)
+    TitleView titleView;
+    @BindView(R.id.xrecyclerview)
+    XRecyclerView mXRecyclerView;
+
     private HomeFragmentListAdapter adapter;
 
     @Override
@@ -58,19 +64,14 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_main, null);
-        initWidget(view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    private void initWidget(View view) {
-        titleView = (TitleView) view.findViewById(R.id.title_view);
         titleView.setLeftDrawableVisible(false);
-        mXRecyclerView = (XRecyclerView)view.findViewById(R.id.xrecyclerview);
         mXRecyclerView.setPullRefreshEnabled(true);
         mXRecyclerView.setLoadingMoreEnabled(true);
         mXRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -87,14 +88,14 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        if(adapter==null){
+        if (adapter == null) {
             adapter = new HomeFragmentListAdapter(getActivity());
         }
 
         List<HomeFragmentListModel> list = new ArrayList<>();
-        for (int i = 1; i <11 ; i++) {
+        for (int i = 1; i < 11; i++) {
             HomeFragmentListModel model = new HomeFragmentListModel();
-            model.setTime("2017-10-"+i);
+            model.setTime("2017-10-" + i);
             model.setAddress("潘达利亚");
             list.add(model);
         }
@@ -103,8 +104,9 @@ public class HomeFragment extends BaseFragment {
         adapter.setOnIntemClickListener(new HomeFragmentListAdapter.onIntemClickListener() {
             @Override
             public void itemClick(HomeFragmentListModel model) {
-                toast("aiyawoqu"+model.getTime());
+                toast("aiyawoqu" + model.getTime());
             }
         });
     }
+
 }

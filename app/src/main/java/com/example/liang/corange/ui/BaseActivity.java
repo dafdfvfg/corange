@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
                 if(opDilaog!=null&&opDilaog.isShowing()){
                     opDilaog.dismiss();
                 }
-                toast("网络已恢复");
+//                toast("网络已恢复");
             } else {
                 Log.i("wocao","bukeyong");
                 showDialog();

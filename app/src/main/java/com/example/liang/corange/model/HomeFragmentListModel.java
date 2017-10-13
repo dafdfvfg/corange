@@ -1,6 +1,5 @@
 package com.example.liang.corange.model;
 
-import android.widget.TextView;
 
 /**
  * Created by liang on 2017/10/9.

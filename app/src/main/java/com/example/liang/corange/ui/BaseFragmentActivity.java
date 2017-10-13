@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.view.inputmethod.InputMethodManager;
+
 import com.example.liang.corange.R;
 import com.example.liang.corange.common.Configure;
 import com.example.liang.corange.element.Global;
@@ -19,41 +20,17 @@ import com.example.liang.corange.utils.StatusBarCompat;
 
 
 /**
- * BaseFragmentActivity
- * Created by liang on 2017/5/2.
+
  */
 public class BaseFragmentActivity extends BaseActivity {
 
     protected int minFragments = 0;
+
     private static final String EXTRA_KEY_REQUEST_CDOE = "request_code_";
+
     private int fragmentRequestCode;
     private Integer fragmentResultCode;
     private Intent fragmentResultData;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Global.init(this);
-        setContentView(R.layout.activity_empty_container);
-        onNewIntent(getIntent());
-        changeStatusBarCompat(false, 0);
-        this.overridePendingTransition(R.anim.in_from_right, android.R.anim.fade_out);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        if (intent != null) {
-            if (intent.hasExtra("fname")) {
-                showFragment(intent.getStringExtra("fname"), intent.getBundleExtra("args"));
-            } else if (intent.getBooleanExtra("finish", false)) {
-                intent.removeExtra("finish");
-                this.overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-                finish();
-            }
-        }
-    }
 
     public static Intent getIntent(Context activity, Class<? extends Fragment> f, Bundle args) {
         Intent intent = new Intent(activity, BaseFragmentActivity.class);
@@ -62,11 +39,11 @@ public class BaseFragmentActivity extends BaseActivity {
         return intent;
     }
 
-    public static void startFragment(Context activity, Class<? extends Fragment> f, Bundle args) {
-        startFragment(activity, f.getName(), args);
+    public static void go(Context activity, Class<? extends Fragment> f, Bundle args) {
+        go(activity, f.getName(), args);
     }
 
-    public static void startFragment(Context activity, String fname, Bundle args) {
+    public static void go(Context activity, String fname, Bundle args) {
         Intent intent = new Intent(activity, BaseFragmentActivity.class);
 
         intent.putExtra("fname", fname);
@@ -82,6 +59,32 @@ public class BaseFragmentActivity extends BaseActivity {
         intent.putExtra("args", args);
         activity.startActivityForResult(intent, requestCode);
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Global.init(this);
+        setContentView(R.layout.activity_empty_container);
+        onNewIntent(getIntent());
+        changeStatusBarCompat(false, 0);
+//        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+//        overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+        if (intent != null) {
+            if (intent.hasExtra("fname")) {
+                showFragment(intent.getStringExtra("fname"), intent.getBundleExtra("args"));
+            } else if (intent.getBooleanExtra("finish", false)) {
+                intent.removeExtra("finish");
+                finish();
+            }
+        }
+    }
+
 
     private int getBrand() {
         String MODEL = Build.MODEL;
@@ -175,6 +178,7 @@ public class BaseFragmentActivity extends BaseActivity {
         String tag = fragment.getClass().getName();
         fragmentTransaction.add(R.id.fragment_container, fragment, tag);
 
+
         if (!replaceMode) {
             fragmentTransaction.addToBackStack(tag);
         }
@@ -236,6 +240,8 @@ public class BaseFragmentActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        // FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
 
         if (currentFragment instanceof BaseFragment) {
@@ -271,11 +277,5 @@ public class BaseFragmentActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        this.overridePendingTransition(0, R.anim.in_from_right);
     }
 }
