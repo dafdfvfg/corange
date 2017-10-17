@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,10 +107,12 @@ public class TitleView extends FrameLayout implements View.OnClickListener {
 
         setViewPadding(getContext(), this);
     }
-    public void setTitleBackground(int color ){
+
+    public void setTitleBackground(int color) {
         setBackgroundResource(color);
         title_ll.setBackgroundResource(color);
     }
+
     public void setLeftText(String text) {
         title_left_tv.setText(text);
         title_left_tv.setVisibility(VISIBLE);
@@ -192,14 +194,16 @@ public class TitleView extends FrameLayout implements View.OnClickListener {
         if (v == title_left_fl) {
             if (getContext() instanceof BaseFragmentActivity) {
                 BaseFragmentActivity activity = (BaseFragmentActivity) getContext();
-                Fragment fragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                Fragment fragment = activity.getFragmentManager().findFragmentById(R.id.fragment_container);
                 if (fragment != null && fragment instanceof BaseFragment) {
                     ((BaseFragment) fragment).onBackPressed(activity);
+                    ((Activity) getContext()).overridePendingTransition(0, 0);
                     return;
                 }
             }
             if (getContext() instanceof Activity) {
                 ((Activity) getContext()).onBackPressed();
+                ((Activity) getContext()).overridePendingTransition(0, 0);
             }
         }
     }

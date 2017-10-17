@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.example.liang.corange.views.TitleView
         android:id="@+id/title_view"
         android:layout_width="match_parent"
-        app:titleText="@string/mine"
+        android:layout_height="wrap_content"
         app:leftDrawable="@drawable/tab_ic_mine_normal"
-        android:layout_height="wrap_content"/>
+        app:titleText="@string/mine" />
 
     <TextView
         android:id="@+id/text"
@@ -19,4 +19,5 @@
         android:layout_centerInParent="true"
         android:text="我的页面"
         android:textSize="28sp" />
+
 </RelativeLayout>

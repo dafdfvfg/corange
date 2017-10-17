@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        overridePendingTransition(0,0);
         initWidget();
         PgyUpdateManager.register(MainActivity.this, null,
                 new UpdateManagerListener() {
@@ -124,16 +125,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivs[i].setImageDrawable(selectedDrawables[i]);
         switch (i) {
             case 0:
-                getSupportFragmentManager().beginTransaction().replace(R.id.main, homeFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.main, homeFragment).commit();
                 break;
             case 1:
-                getSupportFragmentManager().beginTransaction().replace(R.id.main, nearbyFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.main, nearbyFragment).commit();
                 break;
             case 2:
-                getSupportFragmentManager().beginTransaction().replace(R.id.main, discoverFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.main, discoverFragment).commit();
                 break;
             case 3:
-                getSupportFragmentManager().beginTransaction().replace(R.id.main, mineFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.main, mineFragment).commit();
                 break;
 
         }

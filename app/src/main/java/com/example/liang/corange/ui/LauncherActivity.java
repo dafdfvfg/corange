@@ -25,6 +25,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         view = View.inflate(this, R.layout.activity_main_welcome, null);
+        overridePendingTransition(0,0);
         setContentView(view);
         context = this;
         shared = new SharedConfig(context).GetConfig();
@@ -62,7 +63,6 @@ public class LauncherActivity extends BaseActivity {
                     intent = new Intent(LauncherActivity.this, MainActivity.class);
                 }
                 startActivity(intent);
-                overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
                 LauncherActivity.this.finish();
             }
 

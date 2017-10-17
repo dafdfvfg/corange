@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 import com.example.liang.corange.R;
 
 /**
- * Created by Administrator on 2017/6/7.
+ * Created by liang on 2017/10/16.
  */
 
 public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.fragment_test);
     }
 }
