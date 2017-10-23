@@ -17,4 +17,7 @@
         android:layout_centerInParent="true"
         android:text="sqlite存储"
         android:textSize="28sp" />
+
+
+
 </RelativeLayout>

@@ -21,7 +21,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        getInstance = BaseApplication.this;
+        getInstance =BaseApplication.this;
         BroadcastReceiver receiver = new NetStateChangeBroadCastReciver();
         //注册BroadCastReciver,设置监听的频道。就是filter中的
         IntentFilter filter = new IntentFilter();

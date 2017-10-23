@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.liang.corange.R;
+import com.example.liang.corange.business.homepage.discover.SqliteOperatingFragment;
 import com.example.liang.corange.ui.BaseFragment;
+import com.example.liang.corange.ui.BaseFragmentActivity;
 import com.example.liang.corange.views.TitleView;
 
 import butterknife.BindView;
@@ -49,14 +51,16 @@ public class DiscoverFragment extends BaseFragment {
 
     @OnClick(R.id.btn_save)
     public void sumBut(Button button) {
-        if (button.getText().equals("唉！无语")) {
-            button.setText("不清楚");
-        } else {
-            button.setText("唉！无语");
-        }
+        BaseFragmentActivity.startFragment(getActivity(), SqliteOperatingFragment.class, null);
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(button, "rotation", 0, 360);
-        animator.setDuration(3000);
-        animator.start();
+//        if (button.getText().equals("唉！无语")) {
+//            button.setText("不清楚");
+//        } else {
+//            button.setText("唉！无语");
+//        }
+//
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(button, "rotation", 0, 360);
+//        animator.setDuration(3000);
+//        animator.start();
     }
 }
