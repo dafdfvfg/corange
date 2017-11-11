@@ -25,10 +25,7 @@ import butterknife.OnClick;
  */
 
 public class DiscoverFragment extends BaseFragment {
-    @BindView(R.id.title_view)
-    TitleView titleView;
-    @BindView(R.id.btn_save)
-    Button button;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +36,7 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover_main, null);
-        ButterKnife.bind(this, view);
-        titleView.setLeftDrawableVisible(false);
+
         return view;
     }
 
@@ -49,18 +45,18 @@ public class DiscoverFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    @OnClick(R.id.btn_save)
-    public void sumBut(Button button) {
-        BaseFragmentActivity.startFragment(getActivity(), SqliteOperatingFragment.class, null);
-
-//        if (button.getText().equals("唉！无语")) {
-//            button.setText("不清楚");
-//        } else {
-//            button.setText("唉！无语");
-//        }
+//    @OnClick(R.id.btn_save)
+//    public void sumBut(Button button) {
+//        BaseFragmentActivity.startFragment(getActivity(), SqliteOperatingFragment.class, null);
 //
-//        ObjectAnimator animator = ObjectAnimator.ofFloat(button, "rotation", 0, 360);
-//        animator.setDuration(3000);
-//        animator.start();
-    }
+////        if (button.getText().equals("唉！无语")) {
+////            button.setText("不清楚");
+////        } else {
+////            button.setText("唉！无语");
+////        }
+////
+////        ObjectAnimator animator = ObjectAnimator.ofFloat(button, "rotation", 0, 360);
+////        animator.setDuration(3000);
+////        animator.start();
+//    }
 }

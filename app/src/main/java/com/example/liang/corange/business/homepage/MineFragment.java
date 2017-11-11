@@ -36,10 +36,7 @@ import okhttp3.Response;
  */
 
 public class MineFragment extends BaseFragment {
-    @BindView(R.id.title_view)
-    TitleView titleView;
-    @BindView(R.id.text)
-    TextView textView;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +55,6 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        titleView.setLeftDrawableVisible(false);
         Map<String, String> map = new HashMap<>();
         map.put("key", "bc269be612b2e20cb75dcc8451237905");
         map.put("v", "1.0");
@@ -82,17 +78,17 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.text)
-    public void setOnClik() {
-//        startActivity(new Intent(getActivity(),TestActivity.class));
-
-//        FragmentManager manager = getFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        TestFragment fragment = new TestFragment();
-//        transaction.add(R.id.main,fragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-
-        BaseFragmentActivity.startFragment(getActivity(), TestFragment.class, null);
-    }
+//    @OnClick(R.id.text)
+//    public void setOnClik() {
+////        startActivity(new Intent(getActivity(),TestActivity.class));
+//
+////        FragmentManager manager = getFragmentManager();
+////        FragmentTransaction transaction = manager.beginTransaction();
+////        TestFragment fragment = new TestFragment();
+////        transaction.add(R.id.main,fragment);
+////        transaction.addToBackStack(null);
+////        transaction.commit();
+//
+//        BaseFragmentActivity.startFragment(getActivity(), TestFragment.class, null);
+//    }
 }

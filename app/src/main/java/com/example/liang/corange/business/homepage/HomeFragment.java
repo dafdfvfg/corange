@@ -47,10 +47,7 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragment extends BaseFragment {
-    @BindView(R.id.title_view)
-    TitleView titleView;
-    @BindView(R.id.xrecyclerview)
-    XRecyclerView mXRecyclerView;
+
 
     private HomeFragmentListAdapter adapter;
 
@@ -64,49 +61,48 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_main, null);
-        ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        titleView.setLeftDrawableVisible(false);
-        mXRecyclerView.setPullRefreshEnabled(true);
-        mXRecyclerView.setLoadingMoreEnabled(true);
-        mXRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mXRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-        mXRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-
-            }
-        });
-
-        if (adapter == null) {
-            adapter = new HomeFragmentListAdapter(getActivity());
-        }
-
-        List<HomeFragmentListModel> list = new ArrayList<>();
-        for (int i = 1; i < 11; i++) {
-            HomeFragmentListModel model = new HomeFragmentListModel();
-            model.setTime("2017-10-" + i);
-            model.setAddress("潘达利亚");
-            list.add(model);
-        }
-        adapter.setData(list);
-        mXRecyclerView.setAdapter(adapter);
-        adapter.setOnIntemClickListener(new HomeFragmentListAdapter.onIntemClickListener() {
-            @Override
-            public void itemClick(HomeFragmentListModel model) {
-                toast("aiyawoqu" + model.getTime());
-            }
-        });
+//        titleView.setLeftDrawableVisible(false);
+//        mXRecyclerView.setPullRefreshEnabled(true);
+//        mXRecyclerView.setLoadingMoreEnabled(true);
+//        mXRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mXRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//        mXRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//
+//            }
+//        });
+//
+//        if (adapter == null) {
+//            adapter = new HomeFragmentListAdapter(getActivity());
+//        }
+//
+//        List<HomeFragmentListModel> list = new ArrayList<>();
+//        for (int i = 1; i < 11; i++) {
+//            HomeFragmentListModel model = new HomeFragmentListModel();
+//            model.setTime("2017-10-" + i);
+//            model.setAddress("潘达利亚");
+//            list.add(model);
+//        }
+//        adapter.setData(list);
+//        mXRecyclerView.setAdapter(adapter);
+//        adapter.setOnIntemClickListener(new HomeFragmentListAdapter.onIntemClickListener() {
+//            @Override
+//            public void itemClick(HomeFragmentListModel model) {
+//                toast("aiyawoqu" + model.getTime());
+//            }
+//        });
     }
 
 }

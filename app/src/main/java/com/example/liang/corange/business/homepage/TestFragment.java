@@ -22,21 +22,13 @@ import butterknife.OnClick;
 
 public class TestFragment extends BaseFragment {
 
-    @BindView(R.id.btn_click)
-    Button button;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_test,null);
-        ButterKnife.bind(this,view);
         return view;
     }
 
-    @OnClick(R.id.btn_click)
-    public void setButton(Button button){
-
-        BaseFragmentActivity.startFragment(getActivity(),TestFragment2.class,null);
-    }
 
 
 }

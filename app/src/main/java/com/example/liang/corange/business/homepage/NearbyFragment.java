@@ -20,8 +20,7 @@ import butterknife.ButterKnife;
  */
 
 public class NearbyFragment extends BaseFragment {
-    @BindView(R.id.title_view)
-    TitleView titleView;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +39,5 @@ public class NearbyFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        titleView.setLeftDrawableVisible(false);
     }
 }
