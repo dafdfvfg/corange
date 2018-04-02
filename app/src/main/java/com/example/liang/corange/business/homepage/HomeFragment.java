@@ -50,6 +50,7 @@ public class HomeFragment extends BaseFragment {
 
 
     private HomeFragmentListAdapter adapter;
+    private TitleView titleView;
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -67,7 +68,8 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        titleView.setLeftDrawableVisible(false);
+        titleView = (TitleView)getActivity().findViewById(R.id.title_view);
+        titleView.setLeftDrawableVisible(false);
 //        mXRecyclerView.setPullRefreshEnabled(true);
 //        mXRecyclerView.setLoadingMoreEnabled(true);
 //        mXRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

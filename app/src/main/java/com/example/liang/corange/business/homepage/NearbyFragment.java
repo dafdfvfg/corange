@@ -13,6 +13,7 @@ import com.example.liang.corange.views.TitleView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 附近
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
  */
 
 public class NearbyFragment extends BaseFragment {
+    TitleView titleView;
 
 
     @Override
@@ -31,7 +33,7 @@ public class NearbyFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby_main, null);
-        ButterKnife.bind(this, view);
+        initView(view);
         return view;
     }
 
@@ -39,5 +41,15 @@ public class NearbyFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    private void initView(View view) {
+        titleView = (TitleView) view.findViewById(R.id.title_view);
+        titleView.setLeftDrawableVisible(false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

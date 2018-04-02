@@ -9,7 +9,6 @@
         android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:leftDrawable="@drawable/tab_ic_mine_normal"
         app:titleText="@string/mine" />
 
     <TextView

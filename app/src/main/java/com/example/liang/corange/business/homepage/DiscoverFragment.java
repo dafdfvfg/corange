@@ -36,7 +36,6 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discover_main, null);
-
         return view;
     }
 
