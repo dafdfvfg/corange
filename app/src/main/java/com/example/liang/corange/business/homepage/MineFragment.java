@@ -1,29 +1,22 @@
 package com.example.liang.corange.business.homepage;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.example.liang.corange.R;
 import com.example.liang.corange.network.HttpUtils;
 import com.example.liang.corange.ui.BaseFragment;
 import com.example.liang.corange.ui.BaseFragmentActivity;
 import com.example.liang.corange.ui.TestActivity;
-import com.example.liang.corange.views.TitleView;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
@@ -80,14 +73,14 @@ public class MineFragment extends BaseFragment {
 
 //    @OnClick(R.id.text)
 //    public void setOnClik() {
-////        startActivity(new Intent(getActivity(),TestActivity.class));
+//        startActivity(new Intent(getActivity(),TestActivity.class));
 //
-////        FragmentManager manager = getFragmentManager();
-////        FragmentTransaction transaction = manager.beginTransaction();
-////        TestFragment fragment = new TestFragment();
-////        transaction.add(R.id.main,fragment);
-////        transaction.addToBackStack(null);
-////        transaction.commit();
+//        FragmentManager manager = getFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        TestFragment fragment = new TestFragment();
+//        transaction.add(R.id.main,fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
 //
 //        BaseFragmentActivity.startFragment(getActivity(), TestFragment.class, null);
 //    }
