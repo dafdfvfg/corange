@@ -43,6 +43,8 @@ public class MineFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         return view;
 
+        
+
     }
 
     @Override
