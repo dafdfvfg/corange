@@ -24,7 +24,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * 我的
+ * 我的页面
  * Created by liang on 1/8/2017.
  */
 
@@ -43,7 +43,7 @@ public class MineFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         return view;
 
-        
+
 
     }
 
